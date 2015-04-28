@@ -1,0 +1,22 @@
+/* :styles General*/
+.banner-header {
+  background: #03a9f4;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: #ffffff; }
+
+.icon-github {
+  background: no-repeat url("../img/github-16px.png");
+  width: 16px;
+  height: 16px; }
+
+.collapsible {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border: none; }
+
+pre, pre code {
+  white-space: pre-wrap; }
+
+/* :end styles*/

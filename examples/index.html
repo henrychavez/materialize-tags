@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Materialize Tags</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/github.css">
+    <link rel="stylesheet" href="../dist/css/materialize-tags.min.css">
+    <link rel="stylesheet" href="assets/css/app.css"/>
+</head>
+<body>
+<header class="banner-header">
+    <div class="container">
+        <h1>Materialize Tags input</h1>
+        <p>jQuery plugin providing a Twitter Bootstrap user interface for managing tags</p>
+        <p>
+            <a class="btn light-blue darken-3 waves-effect waves-light" style="margin-bottom: 10px;" href="https://github.com/henrychavez/materialize-tags">Code on Github</a>
+            <a class="btn light-blue darken-3 waves-effect waves-light" style="margin-bottom: 10px;" href="http://materializecss.com/">Materialize v0.96.1</a>
+            <a class="btn light-blue darken-3 waves-effect waves-light" style="margin-bottom: 10px;" href="http://timschlechter.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.zip">Download</a>
+        </p>
+    </div>
+</header>
+<div class="container">
+    <h3>Examples</h3>
+    <div class="divider"></div>
+    <section id="example-basic" class="example">
+        <header>
+            <h5>Basic</h5>
+        </header>
+        <p>Just add <code>data-role="materialtags"</code> to your input field to automatically change it to a tags input
+            field.</p>
+
+        <div class="row mt-example">
+            <div class="input-field col s12">
+                <label for="tags">Tags</label>
+                <input type="text" name="tags" id="tags" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="materialtags"/>
+            </div>
+        </div>
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header"><i class="mdi-content-add"></i>Show code</div>
+                <div class="collapsible-body">
+                    <pre><code data-language="html">
+&lt;input type=&quot;text&quot; value=&quot;Amsterdam,Washington,Sydney,Beijing,Cairo&quot;data-role=&quot;materialtags&quot; /&gt;
+                    </code></pre>
+                </div>
+            </li>
+        </ul>
+        <table class="bordered responsive-table">
+            <thead>
+            <tr>
+                <th>statement</th>
+                <th>returns</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>$("input").val()</code></td>
+                <td>
+                    <pre class="val"><code data-language="javascript"></code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>$("input").materialtags('items')</code></td>
+                <td>
+                    <pre class="items"><code data-language="javascript"></code></pre>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="example-typeahead" class="example">
+        <header>
+            <h5>Typeahead</h5>
+        </header>
+        <p>Typeahead is not included in Bootstrap 3, so you'll have to include your own typeahead library. I'd recommed
+            <a href="http://twitter.github.io/typeahead.js/">typeahead.js</a>. An example of using this is shown below.
+        </p>
+
+        <div class="row mt-example">
+            <label for="tags">Tags</label>
+            <input type="text" name="tags" id="tags" value="Amsterdam,Washington"/>
+        </div>
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header"><i class="mdi-content-add"></i>Show code</div>
+                <div class="collapsible-body">
+                    <pre>
+                        <code data-language="html">
+&lt;input type=&quot;text&quot; value=&quot;Amsterdam,Washington&quot; data-role=&quot;materialtags&quot;/&gt;
+&lt;script&gt;
+    var citynames = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+            url: 'assets/citynames.json',
+            filter: function(list) {
+                return $.map(list, function(cityname) {
+                    return { name: cityname };
+                });
+            }
+        }
+    });
+
+    citynames.initialize();
+
+    $('input').materialtags({
+        typeaheadjs: {
+            name: 'citynames',
+            displayKey: 'name',
+            valueKey: 'name',
+            source: citynames.ttAdapter()
+        }
+    });
+&lt;/script&gt;
+                        </code></pre>
+                </div>
+            </li>
+        </ul>
+        <table class="bordered responsive-table">
+            <thead>
+            <tr>
+                <th>statement</th>
+                <th>returns</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>$("input").val()</code></td>
+                <td>
+                    <pre class="val"><code data-language="javascript"></code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>$("input").materialtags('items')</code></td>
+                <td>
+                    <pre class="items"><code data-language="javascript"></code></pre>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="example_objects" class="example">
+        <header>
+            <h5>Objects as tags</h5>
+        </header>
+        <p>Instead of just adding strings as tags, bind objects to your tags. This makes it possible to set id values in
+            your input field's value, instead of just the tag's text.</p>
+
+        <div class="row mt-example">
+            <label for="tags">Tags</label>
+            <input type="text" name="tags" id="tags"/>
+        </div>
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header"><i class="mdi-content-add"></i>Show code</div>
+                <div class="collapsible-body">
+                    <pre>
+                        <code data-language="html">
+&lt;input type=&quot;text&quot; /&gt;
+&lt;script&gt;
+    var cities = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: 'assets/cities.json'
+    });
+    cities.initialize();
+
+    var elt = $('input');
+    elt.materialtags({
+        itemValue: 'value',
+        itemText: 'text',
+        typeaheadjs: {
+            name: 'cities',
+            displayKey: 'text',
+            source: cities.ttAdapter()
+        }
+    });
+    elt.materialtags('add', { "value": 1 , "text": "Amsterdam" , "continent": "Europe" });
+    elt.materialtags('add', { "value": 4 , "text": "Washington" , "continent": "America" });
+    elt.materialtags('add', { "value": 7 , "text": "Sydney" , "continent": "Australia" });
+    elt.materialtags('add', { "value": 10, "text": "Beijing" , "continent": "Asia" });
+    elt.materialtags('add', { "value": 13, "text": "Cairo" , "continent": "Africa" });
+&lt;/script&gt;
+                        </code></pre>
+                </div>
+            </li>
+        </ul>
+        <table class="bordered responsive-table">
+            <thead>
+            <tr>
+                <th>statement</th>
+                <th>returns</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>$("input").val()</code></td>
+                <td>
+                    <pre class="val"><code data-language="javascript"></code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>$("input").materialtags('items')</code></td>
+                <td>
+                    <pre class="items"><code data-language="javascript"></code></pre>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+<script src="../dist/js/materialize-tags.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/rainbow.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/generic.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/html.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/javascript.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/init.js"></script>
+</body>
+</html>

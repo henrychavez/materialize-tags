@@ -1,0 +1,29 @@
+// Mixins
+@mixin box-shadow($arg){
+  -webkit-box-shadow: $arg;
+  -moz-box-shadow: $arg;
+  box-shadow: $arg;
+}
+
+/* :styles General*/
+.banner-header {
+  background: #03a9f4;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: #ffffff;
+}
+.icon-github {
+  background: no-repeat url('../img/github-16px.png');
+  width: 16px;
+  height: 16px;
+}
+
+.collapsible {
+  @include box-shadow(none);
+  border: none;
+}
+
+pre,pre code {
+  white-space: pre-wrap;
+}
+/* :end styles*/

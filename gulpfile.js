@@ -3,7 +3,8 @@ var gulp       = require('gulp'),
     minifyCss  = require('gulp-minify-css'),
     concat     = require('gulp-concat'),
     rename     = require("gulp-rename"),
-    sourcemaps = require('gulp-sourcemaps');
+    sourcemaps = require('gulp-sourcemaps'),
+    zip        = require('gulp-zip');
 
 gulp.task('js', function ()
 {
@@ -25,7 +26,7 @@ gulp.task('css', function ()
     return gulp.src('src/*.css')
         .pipe(gulp.dest('dist/css'))
         .pipe(sourcemaps.init())
-        .pipe(minifyCss({compatibility: 'ie8'}))
+        .pipe(minifyCss({compatibility : 'ie8'}))
         .pipe(rename({
             extname : '.min.css'
         }))
@@ -33,4 +34,11 @@ gulp.task('css', function ()
         .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('build', ['css', 'js']);
+gulp.task('zip', function ()
+{
+   return gulp.src('dist/*')
+       .pipe(zip('materialize-tags.zip'))
+       .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build', ['css', 'js', 'zip']);

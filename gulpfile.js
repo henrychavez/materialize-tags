@@ -43,7 +43,7 @@ gulp.task('del-zip', function ()
 
 gulp.task('zip', function ()
 {
-    return gulp.src('dist/*')
+    return gulp.src('dist/*/**')
         .pipe(zip('materialize-tags.zip'))
         .pipe(gulp.dest('dist'));
 });

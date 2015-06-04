@@ -36,7 +36,7 @@ cities.initialize();
  */
 var elt = $('#example-typeahead input.typehead-input');
 elt.materialtags({
-    value: 'name',
+    freeInput:false,
     typeaheadjs : {
         name       : 'citynames',
         displayKey : 'name',

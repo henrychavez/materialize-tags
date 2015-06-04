@@ -86,12 +86,10 @@
             var parentContainer = $(this).parents('.materialize-tags'),
                 tags            = parentContainer.find('span.tag');
             parentContainer.removeClass('active');
-
             // Verify if is empty and remove "active" class from label
             if (tags.length == 0)
             {
                 parentContainer.parent().find('label').removeClass('active');
-                console.log('parent is', parentContainer.parent());
             }
         });
     }

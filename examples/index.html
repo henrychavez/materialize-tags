@@ -12,23 +12,6 @@
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-    <script>window.twttr = (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0],
-            t = window.twttr || {};
-        if (d.getElementById(id)) return t;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
-
-        t._e = [];
-        t.ready = function(f) {
-            t._e.push(f);
-        };
-
-        return t;
-    }(document, "script", "twitter-wjs"));</script>
-
 </head>
 <body>
 <div id="fb-root"></div>
@@ -52,7 +35,8 @@
         <div style="line-height: 11px;">
             <iframe src="https://ghbtns.com/github-btn.html?user=henrychavez&repo=materialize-tags&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
             <iframe src="https://ghbtns.com/github-btn.html?user=henrychavez&repo=materialize-tags&type=fork&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
-            <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags=materializetags">Tweet</a>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="HnryChavez" data-hashtags="materializetags">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
             <div class="g-plusone" data-size="medium" data-href="http://henrychavez.github.io/materialize-tags/examples/"></div>
             <div class="fb-like" data-href="http://henrychavez.github.io/materialize-tags/examples/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
         </div>
@@ -71,7 +55,7 @@
         <div class="row mt-example">
             <div class="input-field col s12">
                 <label for="tags">Tags</label>
-                <input type="text" name="tags" id="tags" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="materialtags"/>
+                <input type="text" name="tags" id="tags" value="" data-role="materialtags"/>
             </div>
         </div>
         <ul class="collapsible" data-collapsible="accordion">

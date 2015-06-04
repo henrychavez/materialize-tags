@@ -4,6 +4,7 @@ var gulp       = require('gulp'),
     concat     = require('gulp-concat'),
     rename     = require("gulp-rename"),
     sourcemaps = require('gulp-sourcemaps'),
+    rimraf     = require('gulp-rimraf'),
     zip        = require('gulp-zip');
 
 gulp.task('js', function ()
@@ -34,11 +35,17 @@ gulp.task('css', function ()
         .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('zip', function ()
+gulp.task('del-zip', function ()
 {
-   return gulp.src('dist/*')
-       .pipe(zip('materialize-tags.zip'))
-       .pipe(gulp.dest('dist'));
+    return gulp.src('dist/*.zip', {read : false})
+        .pipe(rimraf());
 });
 
-gulp.task('build', ['css', 'js', 'zip']);
+gulp.task('zip', function ()
+{
+    return gulp.src('dist/*')
+        .pipe(zip('materialize-tags.zip'))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build', ['css', 'js', 'del-zip', 'zip']);

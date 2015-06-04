@@ -74,10 +74,24 @@
 
         this.$input.on('focus', function ()
         {
+            var label = $(this).parent().parent().find('label');
             $(this).parents('.materialize-tags').addClass('active');
+
+            if (typeof label.attr('class') == 'undefined' || label.attr('class') == '')
+            {
+                label.addClass('active');
+            }
         }).on('focusout', function ()
         {
-            $(this).parents('.materialize-tags').removeClass('active');
+            var parentContainer = $(this).parents('.materialize-tags'),
+                tags            = parentContainer.find('span.tag');
+            parentContainer.removeClass('active');
+
+            // Verify if is empty and remove "active" class from label
+            if (tags.length == 0)
+            {
+                $(this).parent().parent().find('label').removeClass('active');
+            }
         });
     }
 

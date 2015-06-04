@@ -61,8 +61,6 @@
         this.$element = $(element);
         this.$element.hide();
 
-        //this.isSelect        = (element.tagName === 'SELECT');
-        //this.multiple        = (this.isSelect && element.hasAttribute('multiple'));
         this.objectItems     = options && options.itemValue;
         this.placeholderText = element.hasAttribute('placeholder') ? this.$element.attr('placeholder') : '';
         this.inputSize       = Math.max(1, this.placeholderText.length);
@@ -76,10 +74,24 @@
 
         this.$input.on('focus', function ()
         {
+            var label = $(this).parent().parent().find('label');
             $(this).parents('.materialize-tags').addClass('active');
+
+            if (typeof label.attr('class') == 'undefined' || label.attr('class') == '')
+            {
+                label.addClass('active');
+            }
         }).on('focusout', function ()
         {
-            $(this).parents('.materialize-tags').removeClass('active');
+            var parentContainer = $(this).parents('.materialize-tags'),
+                tags            = parentContainer.find('span.tag');
+            parentContainer.removeClass('active');
+
+            // Verify if is empty and remove "active" class from label
+            if (tags.length == 0)
+            {
+                $(this).parent().parent().find('label').removeClass('active');
+            }
         });
     }
 
@@ -126,12 +138,6 @@
             {
                 return;
             }
-
-            // If SELECT but not multiple, remove current tag
-            /*if (self.isSelect && !self.multiple && self.itemsArray.length > 0)
-            {
-                self.remove(self.itemsArray[0]);
-            }*/
 
             if (typeof item === "string" && this.$element[0].tagName === 'INPUT')
             {
@@ -192,15 +198,6 @@
             self.findInputWrapper().before($tag);
             $tag.after(' ');
 
-            // add <option /> if item represents a value not present in one of the <select />'s options
-            /*if (self.isSelect && !$('option[value="' + encodeURIComponent(itemValue) + '"]', self.$element)[0])
-            {
-                var $option = $('<option selected>' + htmlEncode(itemText) + '</option>');
-                $option.data('item', item);
-                $option.attr('value', itemValue);
-                self.$element.append($option);
-            }*/
-
             if (!dontPushVal)
             {
                 self.pushVal();
@@ -255,7 +252,7 @@
                 }
 
                 $('.tag', self.$container).filter(function () { return $(this).data('item') === item; }).remove();
-                /*$('option', self.$element).filter(function () { return $(this).data('item') === item; }).remove();*/
+
                 if ($.inArray(item, self.itemsArray) !== -1)
                 {
                     self.itemsArray.splice($.inArray(item, self.itemsArray), 1);
@@ -284,7 +281,6 @@
             var self = this;
 
             $('.tag', self.$container).remove();
-            /*$('option', self.$element).remove();*/
 
             while (self.itemsArray.length > 0)
             {
@@ -317,11 +313,6 @@
                     return this.nodeType == 3;
                 })[0].nodeValue = htmlEncode(itemText);
 
-                /*if (self.isSelect)
-                {
-                    var option = $('option', self.$element).filter(function () { return $(this).data('item') === item; });
-                    option.attr('value', itemValue);
-                }*/
             });
         },
 
@@ -367,71 +358,6 @@
             makeOptionItemFunction(self.options, 'itemValue');
             makeOptionItemFunction(self.options, 'itemText');
             makeOptionFunction(self.options, 'tagClass');
-
-            /*// Typeahead Bootstrap version 2.3.2
-            if (self.options.typeahead)
-            {
-                var typeahead = self.options.typeahead || {};
-
-                makeOptionFunction(typeahead, 'source');
-
-                self.$input.typeahead($.extend({}, typeahead, {
-                    source      : function (query, process)
-                    {
-                        function processItems(items)
-                        {
-                            var texts = [];
-
-                            for (var i = 0; i < items.length; i++)
-                            {
-                                var text  = self.options.itemText(items[i]);
-                                map[text] = items[i];
-                                texts.push(text);
-                            }
-                            process(texts);
-                        }
-
-                        this.map = {};
-                        var map  = this.map,
-                            data = typeahead.source(query);
-
-                        if ($.isFunction(data.success))
-                        {
-                            // support for Angular callbacks
-                            data.success(processItems);
-                        }
-                        else if ($.isFunction(data.then))
-                        {
-                            // support for Angular promises
-                            data.then(processItems);
-                        }
-                        else
-                        {
-                            // support for functions and jquery promises
-                            $.when(data)
-                                .then(processItems);
-                        }
-                    },
-                    updater     : function (text)
-                    {
-                        self.add(this.map[text]);
-                        return this.map[text];
-                    },
-                    matcher     : function (text)
-                    {
-                        return (text.toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1);
-                    },
-                    sorter      : function (texts)
-                    {
-                        return texts.sort();
-                    },
-                    highlighter : function (text)
-                    {
-                        var regex = new RegExp('(' + this.query + ')', 'gi');
-                        return text.replace(regex, "<strong>$1</strong>");
-                    }
-                }));
-            }*/
 
             // Typeahead.js
             if (self.options.typeaheadjs)
@@ -599,13 +525,6 @@
                 {
                     self.add(self.$element.val());
                 }
-                /*else
-                {
-                    $('option', self.$element).each(function ()
-                    {
-                        self.add($(this).attr('value'), true);
-                    });
-                }*/
             }
         },
 
@@ -679,11 +598,6 @@
                 materialtags = new TagsMaterialize(this, arg1);
                 $(this).data('materialtags', materialtags);
                 results.push(materialtags);
-
-                /*if (this.tagName === 'SELECT')
-                {
-                    $('option', $(this)).attr('selected', 'selected');
-                }*/
 
                 // Init tags from $(this).val()
                 $(this).val($(this).val());

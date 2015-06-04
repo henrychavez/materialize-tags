@@ -34,7 +34,7 @@ cities.initialize();
 /**
  * Typeahead
  */
-var elt = $('#example-typeahead > > input');
+var elt = $('#example-typeahead input.typehead-input');
 elt.materialtags({
     value: 'name',
     typeaheadjs : {
@@ -48,7 +48,7 @@ elt.materialtags({
 /**
  * Objects as tags
  */
-elt = $('#example_objects > > input');
+elt = $('#example_objects input.object-tag-input');
 elt.materialtags({
     itemValue   : 'value',
     itemText    : 'text',

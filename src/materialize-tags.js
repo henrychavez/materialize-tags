@@ -74,7 +74,7 @@
 
         this.$input.on('focus', function ()
         {
-            var label = $(this).parent().parent().find('label');
+            var label = $(this).parents('.materialize-tags').parent().find('label');
             $(this).parents('.materialize-tags').addClass('active');
 
             if (typeof label.attr('class') == 'undefined' || label.attr('class') == '')
@@ -90,7 +90,8 @@
             // Verify if is empty and remove "active" class from label
             if (tags.length == 0)
             {
-                $(this).parent().parent().find('label').removeClass('active');
+                parentContainer.parent().find('label').removeClass('active');
+                console.log('parent is', parentContainer.parent());
             }
         });
     }

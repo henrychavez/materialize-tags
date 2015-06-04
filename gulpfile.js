@@ -48,4 +48,4 @@ gulp.task('zip', function ()
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build', ['css', 'js', 'del-zip', 'zip']);
+gulp.task('build', ['css', 'js', 'zip']);

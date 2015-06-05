@@ -66,18 +66,24 @@
         this.inputSize       = Math.max(1, this.placeholderText.length);
 
         this.$container = $('<div class="materialize-tags"></div>');
-        this.$input     = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+        this.$input     = $('<input type="text" class="n-tag"  placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+        this.$label     = this.$element.parent().find('label');
 
         this.$element.before(this.$container);
-
         this.build(options);
+
+        this.$label.on('click', function ()
+        {
+            $(this).addClass('active');
+            $(this).next('.materialize-tags').find('input.n-tag').focus();
+        });
 
         this.$input.on('focus', function ()
         {
             var label = $(this).parents('.materialize-tags').parent().find('label');
             $(this).parents('.materialize-tags').addClass('active');
 
-            if (typeof label.attr('class') == 'undefined' || label.attr('class') == '')
+            if (!label.hasClass('active'))
             {
                 label.addClass('active');
             }

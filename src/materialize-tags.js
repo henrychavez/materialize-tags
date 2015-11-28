@@ -642,6 +642,7 @@
         }
     };
 
+    $.fn.materialtags.defaults = defaultOptions;
     $.fn.materialtags.Constructor = TagsMaterialize;
 
     /**

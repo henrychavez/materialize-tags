@@ -487,7 +487,7 @@
                 $input.attr('size', Math.max(this.inputSize, $input.val().length));
             }, self));
 
-            self.$container.on('keypress', 'input', $.proxy(function (event)
+            self.$container.on('keydown', 'input', $.proxy(function (event)
             {
                 var $input = $(event.target);
 
@@ -541,7 +541,7 @@
             var self = this;
 
             // Unbind events
-            self.$container.off('keypress', 'input');
+            self.$container.off('keydown', 'input');
             self.$container.off('click', '[role=remove]');
 
             self.$container.remove();
@@ -716,26 +716,26 @@
      * http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
      * [13, {which: 188, shiftKey: true}]
      *
-     * @param keyPressEvent
+     * @param keyDownEvent
      * @param lookupList
      * @returns {boolean}
      */
-    function keyCombinationInList(keyPressEvent, lookupList)
+    function keyCombinationInList(keyDownEvent, lookupList)
     {
         var found = false;
         $.each(lookupList, function (index, keyCombination)
         {
-            if (typeof (keyCombination) === 'number' && keyPressEvent.which === keyCombination)
+            if (typeof (keyCombination) === 'number' && keyDownEvent.which === keyCombination)
             {
                 found = true;
                 return false;
             }
 
-            if (keyPressEvent.which === keyCombination.which)
+            if (keyDownEvent.which === keyCombination.which)
             {
-                var alt   = !keyCombination.hasOwnProperty('altKey') || keyPressEvent.altKey === keyCombination.altKey,
-                    shift = !keyCombination.hasOwnProperty('shiftKey') || keyPressEvent.shiftKey === keyCombination.shiftKey,
-                    ctrl  = !keyCombination.hasOwnProperty('ctrlKey') || keyPressEvent.ctrlKey === keyCombination.ctrlKey;
+                var alt   = !keyCombination.hasOwnProperty('altKey') || keyDownEvent.altKey === keyCombination.altKey,
+                    shift = !keyCombination.hasOwnProperty('shiftKey') || keyDownEvent.shiftKey === keyCombination.shiftKey,
+                    ctrl  = !keyCombination.hasOwnProperty('ctrlKey') || keyDownEvent.ctrlKey === keyCombination.ctrlKey;
                 if (alt && shift && ctrl)
                 {
                     found = true;

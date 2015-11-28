@@ -16,7 +16,7 @@
         addOnBlur       : true,
         maxTags         : undefined,
         maxChars        : undefined,
-        confirmKeys     : [13, 44],
+        confirmKeys     : [9,13, 44],
         onTagExists     : onTagExists,
         trimValue       : true,
         allowDuplicates : false
@@ -24,7 +24,7 @@
 
     function tagClass(item)
     {
-        return 'badge';
+        return 'chip';
     }
 
     function itemValue(item)
@@ -90,7 +90,7 @@
         }).on('focusout', function ()
         {
             var parentContainer = $(this).parents('.materialize-tags'),
-                tags            = parentContainer.find('span.tag');
+                tags            = parentContainer.find('span.chip');
             parentContainer.removeClass('active');
             // Verify if is empty and remove "active" class from label
             if (tags.length == 0)
@@ -198,7 +198,7 @@
             self.itemsArray.push(item);
 
             // add a tag element
-            var $tag = $('<span class="tag ' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span class="mdi-content-clear right" data-role="remove"></span></span>');
+            var $tag = $('<span class="' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<i class="material-icons" data-role="remove">close</i></span>');
             $tag.data('item', item);
             self.findInputWrapper().before($tag);
             $tag.after(' ');
@@ -256,7 +256,7 @@
                     return;
                 }
 
-                $('.tag', self.$container).filter(function () { return $(this).data('item') === item; }).remove();
+                $('.chip', self.$container).filter(function () { return $(this).data('item') === item; }).remove();
 
                 if ($.inArray(item, self.itemsArray) !== -1)
                 {
@@ -285,7 +285,7 @@
         {
             var self = this;
 
-            $('.tag', self.$container).remove();
+            $('.chip', self.$container).remove();
 
             while (self.itemsArray.length > 0)
             {
@@ -302,7 +302,7 @@
         refresh : function ()
         {
             var self = this;
-            $('.tag', self.$container).each(function ()
+            $('.chip', self.$container).each(function ()
             {
                 var $tag        = $(this),
                     item        = $tag.data('item'),
@@ -487,7 +487,7 @@
                 $input.attr('size', Math.max(this.inputSize, $input.val().length));
             }, self));
 
-            self.$container.on('keypress', 'input', $.proxy(function (event)
+            self.$container.on('keydown', 'input', $.proxy(function (event)
             {
                 var $input = $(event.target);
 
@@ -520,7 +520,7 @@
                 {
                     return;
                 }
-                self.remove($(event.target).closest('.tag').data('item'));
+                self.remove($(event.target).closest('.chip').data('item'));
             }, self));
 
             // Only add existing value as tags when using strings as tags
@@ -541,7 +541,7 @@
             var self = this;
 
             // Unbind events
-            self.$container.off('keypress', 'input');
+            self.$container.off('keydown', 'input');
             self.$container.off('click', '[role=remove]');
 
             self.$container.remove();
@@ -716,26 +716,26 @@
      * http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
      * [13, {which: 188, shiftKey: true}]
      *
-     * @param keyPressEvent
+     * @param keyDownEvent
      * @param lookupList
      * @returns {boolean}
      */
-    function keyCombinationInList(keyPressEvent, lookupList)
+    function keyCombinationInList(keyDownEvent, lookupList)
     {
         var found = false;
         $.each(lookupList, function (index, keyCombination)
         {
-            if (typeof (keyCombination) === 'number' && keyPressEvent.which === keyCombination)
+            if (typeof (keyCombination) === 'number' && keyDownEvent.which === keyCombination)
             {
                 found = true;
                 return false;
             }
 
-            if (keyPressEvent.which === keyCombination.which)
+            if (keyDownEvent.which === keyCombination.which)
             {
-                var alt   = !keyCombination.hasOwnProperty('altKey') || keyPressEvent.altKey === keyCombination.altKey,
-                    shift = !keyCombination.hasOwnProperty('shiftKey') || keyPressEvent.shiftKey === keyCombination.shiftKey,
-                    ctrl  = !keyCombination.hasOwnProperty('ctrlKey') || keyPressEvent.ctrlKey === keyCombination.ctrlKey;
+                var alt   = !keyCombination.hasOwnProperty('altKey') || keyDownEvent.altKey === keyCombination.altKey,
+                    shift = !keyCombination.hasOwnProperty('shiftKey') || keyDownEvent.shiftKey === keyCombination.shiftKey,
+                    ctrl  = !keyCombination.hasOwnProperty('ctrlKey') || keyDownEvent.ctrlKey === keyCombination.ctrlKey;
                 if (alt && shift && ctrl)
                 {
                     found = true;

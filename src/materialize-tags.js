@@ -24,7 +24,7 @@
 
     function tagClass(item)
     {
-        return 'badge';
+        return 'chip';
     }
 
     function itemValue(item)
@@ -198,7 +198,7 @@
             self.itemsArray.push(item);
 
             // add a tag element
-            var $tag = $('<span class="tag ' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span class="mdi-content-clear right" data-role="remove"></span></span>');
+            var $tag = $('<span class="' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<i class="material-icons">close</i></span>');
             $tag.data('item', item);
             self.findInputWrapper().before($tag);
             $tag.after(' ');

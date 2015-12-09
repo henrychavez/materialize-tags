@@ -1,4 +1,7 @@
 /* :styles General*/
+th:not(:last-child),td:not(:last-child) {
+  border-right: 1px solid #ccc;
+}
 .banner-header {
   background: #03a9f4;
   padding-top: 40px;

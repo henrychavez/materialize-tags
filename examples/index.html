@@ -243,9 +243,352 @@
             </tbody>
         </table>
     </section>
+    <section id="options">
+        <div class="page-header">
+            <h3>Options</h3>
+        </div>
+        <table class="bordered responsive-table">
+            <thead>
+            <tr>
+                <th colspan="2">option</th>
+                <th>description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="2"><code>tagClass</code></td>
+                <td>
+                    <p>Classname for the tags, or a function returning a classname</p>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    tagClass: 'big'
+});</code></pre>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    tagClass: function(item) {
+        return (item.length > 10 ? 'big' : 'small');
+    }
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>itemValue</code></td>
+                <td>
+                    <p>When adding objects as tags, itemValue <em>must</em> be set to the name of the property containing the item's value, or a function returning an item's value.</p>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    itemValue: 'id'
+});</code></pre>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    itemValue: function(item) {
+        return item.id;
+    }
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>itemText</code></td>
+                <td>
+                    <p>When adding objects as tags, you can set itemText to the name of the property of item to use for a its tag's text. You may also provide a function which returns an item's value. When this options is not set, the value of <code>itemValue</code> will be used.
+
+
+                <pre><code data-language="javascript">$('input').tagsinput({
+    itemText: 'label'
+});</code></pre>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    itemText: function(item) {
+        return item.label;
+    }
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>confirmKeys</code></td>
+                <td>
+                    <p>Array of keycodes which will add a tag when typing in the input. (default: [13, 188], which are ENTER and comma)</p>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    confirmKeys: [13, 44]
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>maxTags</code></td>
+                <td>
+                    <p>When set, no more than the given number of tags are allowed to add (default: undefined). When maxTags is reached, a class 'bootstrap-tagsinput-max' is placed on the tagsinput element.</p>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    maxTags: 3
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>maxChars</code></td>
+                <td>
+                    <p>Defines the maximum length of a single tag. (default: undefined)</p>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    maxChars: 8
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>trimValue</code></td>
+                <td>
+                    <p>When true, automatically removes all whitespace around tags. (default: false)</p>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    trimValue: true
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>allowDuplicates</code></td>
+                <td>
+                    <p>When true, the same tag can be added multiple times. (default: false)</p>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    allowDuplicates: true
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>freeInput</code></td>
+                <td>
+                    <p>Allow creating tags which are not returned by typeahead's source (default: true)</p>
+                    <div class="bs-callout bs-callout-warning">
+                        This is only possible when using string as tags. When itemValue option is set, this option will be ignored.
+                    </div>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    typeahead: {
+        source: ['Amsterdam', 'Washington', 'Sydney', 'Beijing', 'Cairo']
+    },
+    freeInput: true
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>typeahead</code></td>
+                <td><p>Object containing typeahead specific options</td>
+            </tr>
+            </tr>
+            <tr>
+                <td></td>
+                <td><code>source</code></td>
+                <td>
+                    <p>An array (or function returning a promise or array), which will be used as source for a typeahead.
+
+
+                <pre><code data-language="javascript">$('input').tagsinput({
+    typeahead: {
+        source: ['Amsterdam', 'Washington', 'Sydney', 'Beijing', 'Cairo']
+    }
+});</code></pre>
+                <pre><code data-language="javascript">$('input').tagsinput({
+    typeahead: {
+        source: function(query) {
+            return $.get('http://someservice.com');
+        }
+    }
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>cancelConfirmKeysOnEmpty</code></td>
+                <td><p>Boolean value controlling whether form submissions get processed when pressing enter in a field converted to a tagsinput (default: false).
+                <pre><code data-language="javascript">$('input').tagsinput({
+    cancelConfirmKeysOnEmpty: true
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><code>onTagExists</code></td>
+                <td><p>Function invoked when trying to add an item which allready exists. By default, the existing tag hides and fades in.
+                <pre><code data-language="javascript">$('input').tagsinput({
+    onTagExists: function(item, $tag) {
+        $tag.hide().fadeIn();
+    }
+});</code></pre>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="methods">
+        <div class="page-header">
+            <h3>Methods</h3>
+        </div>
+        <table class="bordered table-responsive">
+            <thead>
+            <tr>
+                <th>method</th>
+                <th>description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>add</code></td>
+                <td>
+                    <p>Adds a tag</p>
+
+                    <pre><code data-language="javascript">$('input').tagsinput('add', 'some tag');</code></pre>
+
+                    <pre><code data-language="javascript">$('input').tagsinput('add', { id: 1, text: 'some tag' });</code></pre>
+
+                    Optionally, you can pass a 3rd parameter (object or value) to the <code>add</code> method to gain more control over the process. The parameter is exposed in the <code>options</code> attribute of the event.
+
+                    <pre><code data-language="javascript">$('input').tagsinput('add', 'some tag', {preventPost: true});</code></pre>
+
+                    Usage:
+
+                <pre><code data-language="javascript">$('#tags-input').on('beforeItemAdd', function(event) {
+    var tag = event.item;
+    // Do some processing here
+    if (!event.options || !event.options.preventPost) {
+        $.ajax('/ajax-url', ajaxData, function(response) {
+            if (response.failure) {
+                // Remove the tag since there was a failure
+                // "preventPost" here will stop this ajax call from running when the tag is removed
+                $('#tags-input').tagsinput('remove', tag, {preventPost: true});
+            }
+        });
+    }
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>remove</code></td>
+                <td>
+                    <p>Removes a tag</p>
+
+                    <pre><code data-language="javascript">$('input').tagsinput('remove', 'some tag');</code></pre>
+
+                    <pre><code data-language="javascript">$('input').tagsinput('remove', { id: 1, text: 'some tag' });</code></pre>
+
+                    Optionally, you can pass a 3rd parameter (object or value) to the <code>remove</code> method to gain more control over the process. The parameter is exposed in the <code>options</code> attribute of the event.
+
+                    <pre><code data-language="javascript">$('input').tagsinput('remove', 'some tag', {preventPost: true});</code></pre>
+
+                    Usage:
+
+                <pre><code data-language="javascript">$('#tags-input').on('beforeItemRemove', function(event) {
+    var tag = event.item;
+    // Do some processing here
+    if (!event.options || !event.options.preventPost) {
+        $.ajax('/ajax-url', ajaxData, function(response) {
+            if (response.failure) {
+                // Re-add the tag since there was a failure
+                // "preventPost" here will stop this ajax call from running when the tag is added
+                $('#tags-input').tagsinput('add', tag, {preventPost: true});
+            }
+        });
+    }
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>removeAll</code></td>
+                <td>
+                    <p>Removes all tags</p>
+
+                    <pre><code data-language="javascript">$('input').tagsinput('removeAll');</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>focus</code></td>
+                <td>
+                    <p>Sets focus in the tagsinput</p>
+
+                    <pre><code data-language="javascript">$('input').tagsinput('focus');</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>input</code></td>
+                <td>
+                    <p>Returns the tagsinput's internal &lt;input /&gt;, which is used for adding tags. You could use this to add your own typeahead behaviour for example.</p>
+
+
+                    <pre><code data-language="html">var $elt = $('input').tagsinput('input');</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>refresh</code></td>
+                <td>
+                    <p>Refreshes the tags input UI. This might be usefull when you're adding objects as tags. When an object's text changes, you'll have to refresh to update the matching tag's text.</p>
+
+                    <pre><code data-language="javascript">$('input').tagsinput('refresh');</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>destroy</code></td>
+                <td>
+                    <p>Removes tagsinput behaviour</p>
+
+                    <pre><code data-language="javascript">$('input').tagsinput('destroy');</code></pre>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="methods">
+        <div class="page-header">
+            <h3>Events</h3>
+        </div>
+        <table class="table table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th>event</th>
+                <th>description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>itemAddedOnInit</code></td>
+                <td>
+                    During initialization, pre-defined tags being added will cause this event to be triggered. Example:
+                <pre><code data-language="javascript">$('input').on('itemAddedOnInit', function(event) {
+    // event.item: contains the item
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>beforeItemAdd</code></td>
+                <td>
+                    Triggered just before an item gets added. Example:
+                <pre><code data-language="javascript">$('input').on('beforeItemAdd', function(event) {
+    // event.item: contains the item
+    // event.cancel: set to true to prevent the item getting added
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>itemAdded</code></td>
+                <td>
+                    Triggered just after an item got added. Example:
+                <pre><code data-language="javascript">$('input').on('itemAdded', function(event) {
+    // event.item: contains the item
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>beforeItemRemove</code></td>
+                <td>
+                    Triggered just before an item gets removed. Example:
+                <pre><code data-language="javascript">$('input').on('beforeItemRemove', function(event) {
+    // event.item: contains the item
+    // event.cancel: set to true to prevent the item getting removed
+});</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>itemRemoved</code></td>
+                <td>
+                    Triggered just after an item got removed. Example:
+                <pre><code data-language="javascript">$('input').on('itemRemoved', function(event) {
+    // event.item: contains the item
+});</code></pre>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
 </div>
-<footer style="text-align: center;">
-    <p>Developer by <a href="https://github.com/henrychavez">Henry Chávez</a> visit <a href="http://www.bytpher.com">Bytpher</a> for Articles and Curses free.</p>
+<footer style="text-align: center; margin-top: 40px;">
+    <p>Development by <a href="https://github.com/henrychavez">Henry Chávez</a>. Visit <a href="http://www.bytpher.com">Bytpher</a> for free Articles and Curses.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>

@@ -503,6 +503,7 @@
                 {
                     self.add(maxLengthReached ? text.substr(0, self.options.maxChars) : text);
                     $input.val('');
+                    (self.$input.typeahead) && self.$input.typeahead("val","");
                     event.preventDefault();
                 }
 

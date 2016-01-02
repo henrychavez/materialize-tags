@@ -93,7 +93,7 @@
                 tags            = parentContainer.find('span.chip');
             parentContainer.removeClass('active');
             // Verify if is empty and remove "active" class from label
-            if (tags.length == 0)
+            if (tags.length == 0 && $(this).val().length == 0)
             {
                 parentContainer.parent().find('label').removeClass('active');
             }

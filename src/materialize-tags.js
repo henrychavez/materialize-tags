@@ -16,7 +16,7 @@
         addOnBlur       : true,
         maxTags         : undefined,
         maxChars        : undefined,
-        confirmKeys     : [9,13, 44],
+        confirmKeys     : [9,13, 44, 188],
         onTagExists     : onTagExists,
         trimValue       : true,
         allowDuplicates : false

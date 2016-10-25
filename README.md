@@ -1,6 +1,11 @@
 # Materialize Tags
 Materialize Tags is a jQuery plugin providing a Material Design user interface for managing tags.
 
+## Building
+* npm install
+* npm install -g gulp-cli
+* gulp build
+
 ## Features
 * Objects as tags
 * Typeaheadjs

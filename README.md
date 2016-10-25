@@ -19,3 +19,4 @@ Integrates with [Typeaheadjs] (https://twitter.github.io/typeahead.js/) for more
 
 ## Contributors
 * [Nicolas Gryman (ngryman)] (https://github.com/ngryman) 
+* [Jonathan DEKHTIAR (DEKHTIARJonathan)] (https://github.com/DEKHTIARJonathan) 

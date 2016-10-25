@@ -1,22 +1,22 @@
 (function ($)
 {
-	"use strict";
+    "use strict";
 
-	/**
-	* Default Configuration
-	*
-	* @type {{tagClass: tagClass, itemValue: itemValue, itemText: itemText, itemTitle: itemTitle, freeInput: boolean, addOnBlur: boolean, maxTags: undefined, maxChars: undefined, confirmKeys: number[], onTagExists: onTagExists, trimValue: boolean, allowDuplicates: boolean}}
-	*/
-	var defaultOptions = {
-		tagClass					: tagClass,
-		itemValue					: itemValue,
-		itemText					: itemText,
-		itemTitle					: itemTitle,
-		freeInput					: true,
-		addOnBlur					: true,
-		maxTags						: undefined,
-		maxChars					: undefined,
-		confirmKeys	                : [9,13, 44, 188],
+    /**
+    * Default Configuration
+    *
+    * @type {{tagClass: tagClass, itemValue: itemValue, itemText: itemText, itemTitle: itemTitle, freeInput: boolean, addOnBlur: boolean, maxTags: undefined, maxChars: undefined, confirmKeys: number[], onTagExists: onTagExists, trimValue: boolean, allowDuplicates: boolean}}
+    */
+    var defaultOptions = {
+        tagClass                    : tagClass,
+        itemValue                   : itemValue,
+        itemText                    : itemText,
+        itemTitle                   : itemTitle,
+        freeInput                   : true,
+        addOnBlur                   : true,
+        maxTags                     : undefined,
+        maxChars                    : undefined,
+        confirmKeys                 : [9,13, 44, 188],
         onTagExists                 : onTagExists,
         trimValue                   : true,
         allowDuplicates             : false,

@@ -114,3 +114,8 @@
     }
   }
 }
+
+.input-field .prefix ~ .materialize-tags {
+  margin-left: 3rem;
+  width: calc(100% - 3rem);
+}

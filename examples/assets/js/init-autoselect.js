@@ -34,7 +34,8 @@ cities.initialize();
 /**
  * Typeahead
  */
-$('#tags-typeahead').materialtags({
+var elt = $('#example-typeahead input.typehead-input');
+elt.materialtags({
     freeInput:false,
     typeaheadjs : {
         name       : 'citynames',
@@ -48,7 +49,8 @@ $('#tags-typeahead').materialtags({
 /**
  * Typeahead with highlight
  */
-$('#tags-highlight').materialtags({
+var elt = $('#example-typeahead-highlight input.typehead-input');
+elt.materialtags({
     freeInput:false,
     typeaheadjs : [{
 		highlight   : true,
@@ -64,7 +66,8 @@ $('#tags-highlight').materialtags({
 /**
  * Typeahead with autoselect and highlight
  */
-$('#tags-autoselect').materialtags({
+var elt = $('#example-typeahead-autoselect input.typehead-input');
+elt.materialtags({
     freeInput:false,
     typeaheadjs : [{
 		autoselect   : true,
@@ -82,7 +85,7 @@ $('#tags-autoselect').materialtags({
 /**
  * Objects as tags
  */
-elt = $('#tags-object');
+elt = $('#example_objects input.object-tag-input');
 elt.materialtags({
     itemValue   : 'value',
     itemText    : 'text',

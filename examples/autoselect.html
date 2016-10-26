@@ -253,13 +253,78 @@
         <header>
             <h5>Typeahead with pattern highlight and autoselect</h5>
         </header>
-        <p>Typeahead is not included in Materializecss, so you'll have to include your own typeahead library. The classical version of
-            <a href="http://twitter.github.io/typeahead.js/">typeahead.js</a> is not maintained by Twitter anymore for more than two years.<br>
-			In order to use this feature we recommend using a specific fork of the current upstream branch: <a href="https://github.com/convoyinc/typeahead.js">convoyinc/typeahead.js</a>.
-			<br><br>
-			For a working example, please visit <a href="autoselect.html">this page</a>
+        <p>Typeahead is not included in Materializecss, so you'll have to include your own typeahead library. I'd recommed
+            <a href="http://twitter.github.io/typeahead.js/">typeahead.js</a>. An example of using this is shown below.
         </p>
 
+        <div class="row mt-example">
+            <div class="input-field col s12">
+                <label for="tags">Tags</label>
+                <input type="text" name="tags-autoselect" id="tags-autoselect" class="typehead-input" value="Amsterdam,Washington"/>
+            </div>
+        </div>
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header"><i class="mdi-content-add"></i>Show code</div>
+                <div class="collapsible-body">
+                    <pre>
+                        <code data-language="html">
+&lt;input type=&quot;text&quot; value=&quot;Amsterdam,Washington&quot; data-role=&quot;materialtags&quot;/&gt;
+&lt;script&gt;
+    var citynames = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+            url: 'assets/citynames.json',
+            filter: function(list) {
+                return $.map(list, function(cityname) {
+                    return { name: cityname };
+                });
+            }
+        }
+    });
+
+    citynames.initialize();
+
+    $('input').materialtags({
+        typeaheadjs: [{
+		autoselect   : true,
+		highlight   : true,
+	},
+	{
+        name       : 'citynames',
+        displayKey : 'name',
+        valueKey   : 'name',
+        source     : citynames.ttAdapter()
+	}]
+    });
+&lt;/script&gt;
+                        </code></pre>
+                </div>
+            </li>
+        </ul>
+        <table class="bordered responsive-table">
+            <thead>
+            <tr>
+                <th>statement</th>
+                <th>returns</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>$("input").val()</code></td>
+                <td>
+                    <pre class="val"><code data-language="javascript"></code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><code>$("input").materialtags('items')</code></td>
+                <td>
+                    <pre class="items"><code data-language="javascript"></code></pre>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </section>
 
     <section id="example_objects" class="example">

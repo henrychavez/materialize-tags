@@ -296,6 +296,12 @@
                 self.$container.removeClass('materialize-tags-max');
                 self.$input.prop('readOnly', false);
             }
+
+			// Remove active class when reached 0 tags
+            if (self.itemsArray.length == 0){
+				self.$input.siblings("label").first().removeClass('active');
+			}
+
             self.$input.blur();
             self.$element.trigger($.Event('itemRemoved', {item : item, options : options}));
         },
@@ -315,6 +321,10 @@
             }
 
             self.pushVal();
+            self.$container.removeClass('materialize-tags-max');
+			self.$input.siblings("label").first().removeClass('active');
+            self.$input.prop('readOnly', false);
+			self.$input.blur();
         },
 
         /**

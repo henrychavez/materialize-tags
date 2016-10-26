@@ -3,24 +3,32 @@
     "use strict";
 
     /**
-     * Default Configuration
-     *
-     * @type {{tagClass: tagClass, itemValue: itemValue, itemText: itemText, itemTitle: itemTitle, freeInput: boolean, addOnBlur: boolean, maxTags: undefined, maxChars: undefined, confirmKeys: number[], onTagExists: onTagExists, trimValue: boolean, allowDuplicates: boolean}}
-     */
+    * Default Configuration
+    *
+    * @type {{tagClass: tagClass, itemValue: itemValue, itemText: itemText, itemTitle: itemTitle, freeInput: boolean, addOnBlur: boolean, maxTags: undefined, maxChars: undefined, confirmKeys: number[], onTagExists: onTagExists, trimValue: boolean, allowDuplicates: boolean}}
+    */
     var defaultOptions = {
-        tagClass        : tagClass,
-        itemValue       : itemValue,
-        itemText        : itemText,
-        itemTitle       : itemTitle,
-        freeInput       : true,
-        addOnBlur       : true,
-        maxTags         : undefined,
-        maxChars        : undefined,
-        confirmKeys     : [9,13, 44],
-        onTagExists     : onTagExists,
-        trimValue       : true,
-        allowDuplicates : false
+        tagClass                    : tagClass,
+        itemValue                   : itemValue,
+        itemText                    : itemText,
+        itemTitle                   : itemTitle,
+        freeInput                   : true,
+        addOnBlur                   : true,
+        maxTags                     : undefined,
+        maxChars                    : undefined,
+        confirmKeys                 : [9,13, 44, 188],
+        onTagExists                 : onTagExists,
+        trimValue                   : true,
+        allowDuplicates             : false,
+        deleteTagsOnBackspace       : true,
+        deleteTagsOnDeleteKey       : true,
+        MoveTagOnLeftArrow          : true,
+        MoveTagOnRightArrow         : true,
+        autoselect                  : false,
+        CapitalizeFirstLetterOnly   : false,
+        prefilled                   : null,
     };
+
 
     function tagClass(item)
     {
@@ -47,13 +55,18 @@
         $tag.hide().fadeIn();
     }
 
+    function selectFirstSuggestion(){
+        $('.tt-suggestion.tt-selectable').first().addClass('tt-cursor');
+        console.log($('.tt-suggestion.tt-selectable'));
+    }
+
     /**
-     * Constructor function
-     *
-     * @param element
-     * @param options
-     * @constructor
-     */
+    * Constructor function
+    *
+    * @param element
+    * @param options
+    * @constructor
+    */
     function TagsMaterialize(element, options)
     {
         this.itemsArray = [];
@@ -61,13 +74,13 @@
         this.$element = $(element);
         this.$element.hide();
 
-        this.objectItems     = options && options.itemValue;
+        this.objectItems    = options && options.itemValue;
         this.placeholderText = element.hasAttribute('placeholder') ? this.$element.attr('placeholder') : '';
-        this.inputSize       = Math.max(1, this.placeholderText.length);
+        this.inputSize      = Math.max(1, this.placeholderText.length);
 
         this.$container = $('<div class="materialize-tags"></div>');
-        this.$input     = $('<input type="text" class="n-tag"  placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
-        this.$label     = this.$element.parent().find('label');
+        this.$input    = $('<input type="text" class="n-tag"  placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+        this.$label    = this.$element.parent().find('label');
 
         this.$element.before(this.$container);
         this.build(options);
@@ -93,7 +106,7 @@
                 tags            = parentContainer.find('span.chip');
             parentContainer.removeClass('active');
             // Verify if is empty and remove "active" class from label
-            if (tags.length == 0)
+            if (tags.length == 0 && $(this).val().length == 0)
             {
                 parentContainer.parent().find('label').removeClass('active');
             }
@@ -104,13 +117,13 @@
         constructor : TagsMaterialize,
 
         /**
-         * Adds the given item as a new tag. Pass true to dontPushVal to prevent
-         * updating the elements val()
-         *
-         * @param item
-         * @param dontPushVal
-         * @param options
-         */
+        * Adds the given item as a new tag. Pass true to dontPushVal to prevent
+        * updating the elements val()
+        *
+        * @param item
+        * @param dontPushVal
+        * @param options
+        */
         add : function (item, dontPushVal, options)
         {
             var self = this;
@@ -130,6 +143,12 @@
             if (typeof item === "string" && self.options.trimValue)
             {
                 item = $.trim(item);
+            }
+
+            // CapitalizeFirstLetter
+            if (typeof item === "string" && self.options.CapitalizeFirstLetterOnly)
+            {
+                item = item.charAt(0).toUpperCase() + item.slice(1);
             }
 
             // Throw an error when trying to add an object while the itemValue option was not set
@@ -212,19 +231,21 @@
             if (self.options.maxTags === self.itemsArray.length || self.items().toString().length === self.options.maxInputLength)
             {
                 self.$container.addClass('materialize-tags-max');
+                self.$input.blur();
+                self.$input.prop('readOnly', true);
             }
 
             self.$element.trigger($.Event('itemAdded', {item : item, options : options}));
         },
 
         /**
-         * Removes the given item. Pass true to dontPushVal to prevent updating the
-         * elements val()
-         *
-         * @param item
-         * @param dontPushVal
-         * @param options
-         */
+        * Removes the given item. Pass true to dontPushVal to prevent updating the
+        * elements val()
+        *
+        * @param item
+        * @param dontPushVal
+        * @param options
+        */
         remove : function (item, dontPushVal, options)
         {
             var self = this;
@@ -273,14 +294,21 @@
             if (self.options.maxTags > self.itemsArray.length)
             {
                 self.$container.removeClass('materialize-tags-max');
+                self.$input.prop('readOnly', false);
             }
 
+			// Remove active class when reached 0 tags
+            if (self.itemsArray.length == 0){
+				self.$input.siblings("label").first().removeClass('active');
+			}
+
+            self.$input.blur();
             self.$element.trigger($.Event('itemRemoved', {item : item, options : options}));
         },
 
         /**
-         * Removes all items
-         */
+        * Removes all items
+        */
         removeAll : function ()
         {
             var self = this;
@@ -293,12 +321,16 @@
             }
 
             self.pushVal();
+            self.$container.removeClass('materialize-tags-max');
+			self.$input.siblings("label").first().removeClass('active');
+            self.$input.prop('readOnly', false);
+			self.$input.blur();
         },
 
         /**
-         * Refreshes the tags so they match the text/value of their corresponding
-         * item.
-         */
+        * Refreshes the tags so they match the text/value of their corresponding
+        * item.
+        */
         refresh : function ()
         {
             var self = this;
@@ -322,17 +354,17 @@
         },
 
         /**
-         * Returns the items added as tags
-         */
+        * Returns the items added as tags
+        */
         items : function ()
         {
             return this.itemsArray;
         },
 
         /**
-         * Assembly value by retrieving the value of each item, and set it on the
-         * element.
-         */
+        * Assembly value by retrieving the value of each item, and set it on the
+        * element.
+        */
         pushVal : function ()
         {
             var self = this,
@@ -342,19 +374,21 @@
                 });
 
             self.$element.val(val, true).trigger('change');
+            self.$input.typeahead('val', '');
         },
 
         /**
-         * Initializes the tags input behaviour on the element
-         *
-         * @param options
-         */
+        * Initializes the tags input behaviour on the element
+        *
+        * @param options
+        */
         build : function (options)
         {
             var self = this;
 
             self.options = $.extend({}, defaultOptions, options);
             // When itemValue is set, freeInput should always be false
+
             if (self.objectItems)
             {
                 self.options.freeInput = false;
@@ -409,13 +443,8 @@
             {
                 self.$input.on('focusout', $.proxy(function (event)
                 {
-                    // HACK: only process on focusout when no typeahead opened, to
-                    //       avoid adding the typeahead text as tag
-                    if ($('.typeahead, .twitter-typeahead', self.$container).length === 0)
-                    {
-                        self.add(self.$input.val());
-                        self.$input.val('');
-                    }
+                    self.add(self.$input.val());
+
                 }, self));
             }
 
@@ -434,7 +463,7 @@
                 {
                     // BACKSPACE
                     case 8:
-                        if (doGetCaretPosition($input[0]) === 0)
+                        if (self.options.deleteTagsOnBackspace && doGetCaretPosition($input[0]) === 0)
                         {
                             var prev = $inputWrapper.prev();
                             if (prev)
@@ -446,7 +475,7 @@
 
                     // DELETE
                     case 46:
-                        if (doGetCaretPosition($input[0]) === 0)
+                        if (self.options.deleteTagsOnDeleteKey && doGetCaretPosition($input[0]) === 0)
                         {
                             var next = $inputWrapper.next();
                             if (next)
@@ -460,7 +489,7 @@
                     case 37:
                         // Try to move the input before the previous tag
                         var $prevTag = $inputWrapper.prev();
-                        if ($input.val().length === 0 && $prevTag[0])
+                        if (self.options.MoveTagOnLeftArrow && $input.val().length === 0 && $prevTag[0])
                         {
                             $prevTag.before($inputWrapper);
                             $input.focus();
@@ -470,7 +499,7 @@
                     case 39:
                         // Try to move the input after the next tag
                         var $nextTag = $inputWrapper.next();
-                        if ($input.val().length === 0 && $nextTag[0])
+                        if (self.options.MoveTagOnRightArrow && $input.val().length === 0 && $nextTag[0])
                         {
                             $nextTag.after($inputWrapper);
                             $input.focus();
@@ -497,19 +526,20 @@
                     return;
                 }
 
-                var text             = $input.val(),
+                var text            = $input.val(),
                     maxLengthReached = self.options.maxChars && text.length >= self.options.maxChars;
                 if (self.options.freeInput && (keyCombinationInList(event, self.options.confirmKeys) || maxLengthReached))
                 {
                     self.add(maxLengthReached ? text.substr(0, self.options.maxChars) : text);
                     $input.val('');
+                    (self.$input.typeahead) && self.$input.typeahead("val","");
                     event.preventDefault();
                 }
 
                 // Reset internal input's size
                 var textLength = $input.val().length,
                     wordSpace  = Math.ceil(textLength / 5),
-                    size       = textLength + wordSpace + 1;
+                    size      = textLength + wordSpace + 1;
                 $input.attr('size', Math.max(this.inputSize, $input.val().length));
             }, self));
 
@@ -534,8 +564,8 @@
         },
 
         /**
-         * Removes all materialtags behaviour and unregsiter all event handlers
-         */
+        * Removes all materialtags behaviour and unregsiter all event handlers
+        */
         destroy : function ()
         {
             var self = this;
@@ -550,28 +580,28 @@
         },
 
         /**
-         * Sets focus on the materialtags
-         */
+        * Sets focus on the materialtags
+        */
         focus : function ()
         {
             this.$input.focus();
         },
 
         /**
-         * Returns the internal input element
-         */
+        * Returns the internal input element
+        */
         input : function ()
         {
             return this.$input;
         },
 
         /**
-         * Returns the element which is wrapped around the internal input. This
-         * is normally the $container, but typeahead.js moves the $input element.
-         */
+        * Returns the element which is wrapped around the internal input. This
+        * is normally the $container, but typeahead.js moves the $input element.
+        */
         findInputWrapper : function ()
         {
-            var elt       = this.$input[0],
+            var elt      = this.$input[0],
                 container = this.$container[0];
             while (elt && elt.parentNode !== container)
             {
@@ -583,13 +613,13 @@
     };
 
     /**
-     * Register JQuery plugin
-     *
-     * @param arg1
-     * @param arg2
-     * @param arg3
-     * @returns {Array}
-     */
+    * Register JQuery plugin
+    *
+    * @param arg1
+    * @param arg2
+    * @param arg3
+    * @returns {Array}
+    */
     $.fn.materialtags = function (arg1, arg2, arg3)
     {
         var results = [];
@@ -642,22 +672,23 @@
         }
     };
 
+    $.fn.materialtags.defaults = defaultOptions;
     $.fn.materialtags.Constructor = TagsMaterialize;
 
     /**
-     * Most options support both a string or number as well as a function as
-     * option value. This function makes sure that the option with the given
-     * key in the given options is wrapped in a function
-     *
-     * @param options
-     * @param key
-     */
+    * Most options support both a string or number as well as a function as
+    * option value. This function makes sure that the option with the given
+    * key in the given options is wrapped in a function
+    *
+    * @param options
+    * @param key
+    */
     function makeOptionItemFunction(options, key)
     {
         if (typeof options[key] !== 'function')
         {
             var propertyName = options[key];
-            options[key]     = function (item) { return item[propertyName]; };
+            options[key]    = function (item) { return item[propertyName]; };
         }
     }
 
@@ -671,8 +702,8 @@
     }
 
     /**
-     * HtmlEncodes the given value
-     */
+    * HtmlEncodes the given value
+    */
     var htmlEncodeContainer = $('<div />');
 
     function htmlEncode(value)
@@ -688,12 +719,12 @@
     }
 
     /**
-     * Returns the position of the caret in the given input field
-     * http://flightschool.acylt.com/devnotes/caret-position-woes/
-     *
-     * @param oField
-     * @returns {number}
-     */
+    * Returns the position of the caret in the given input field
+    * http://flightschool.acylt.com/devnotes/caret-position-woes/
+    *
+    * @param oField
+    * @returns {number}
+    */
     function doGetCaretPosition(oField)
     {
         var iCaretPos = 0;
@@ -712,14 +743,14 @@
     }
 
     /**
-     * Returns boolean indicates whether user has pressed an expected key combination.
-     * http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
-     * [13, {which: 188, shiftKey: true}]
-     *
-     * @param keyDownEvent
-     * @param lookupList
-     * @returns {boolean}
-     */
+    * Returns boolean indicates whether user has pressed an expected key combination.
+    * http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
+    * [13, {which: 188, shiftKey: true}]
+    *
+    * @param keyDownEvent
+    * @param lookupList
+    * @returns {boolean}
+    */
     function keyCombinationInList(keyDownEvent, lookupList)
     {
         var found = false;
@@ -748,9 +779,9 @@
     }
 
     /**
-     * Initialize materialtags behaviour on inputs which have
-     * data-role=materialtags
-     */
+    * Initialize materialtags behaviour on inputs which have
+    * data-role=materialtags
+    */
     $(function ()
     {
         $("input[data-role=materialtags]").materialtags();

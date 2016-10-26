@@ -45,6 +45,25 @@ elt.materialtags({
     }
 });
 
+
+/**
+ * Typeahead with autoselect and highlight
+ */
+var elt = $('#example-typeahead-highlight input.typehead-input');
+elt.materialtags({
+    freeInput:false,
+    typeaheadjs : [{
+		highlight   : true,
+	},
+	{
+        name       : 'citynames',
+        displayKey : 'name',
+        valueKey   : 'name',
+        source     : citynames.ttAdapter()
+	}]
+});
+
+
 /**
  * Objects as tags
  */

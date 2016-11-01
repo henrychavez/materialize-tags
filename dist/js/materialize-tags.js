@@ -26,7 +26,6 @@
         MoveTagOnRightArrow         : true,
         autoselect                  : false,
         CapitalizeFirstLetterOnly   : false,
-        prefilled                   : null,
     };
 
 

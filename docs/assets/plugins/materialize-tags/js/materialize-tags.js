@@ -56,7 +56,6 @@
 
     function selectFirstSuggestion(){
         $('.tt-suggestion.tt-selectable').first().addClass('tt-cursor');
-        console.log($('.tt-suggestion.tt-selectable'));
     }
 
     /**
@@ -187,6 +186,11 @@
                 itemText  = self.options.itemText(item),
                 tagClass  = self.options.tagClass(item),
                 itemTitle = self.options.itemTitle(item);
+
+            // Ignore empty tags
+            if (itemText == '' || itemText == undefined){
+                return;
+            }
 
             // Ignore items all ready added
             var existing = $.grep(self.itemsArray, function (item) { return self.options.itemValue(item) === itemValue; })[0];

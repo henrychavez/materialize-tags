@@ -12,7 +12,7 @@ Materialize Tags is a jQuery plugin providing a Material Design user interface f
 ## Features
 * Objects as tags
 * Typeaheadjs: [CoreJavascript-Typeahead](https://github.com/corejavascript/typeahead.js)
-* Designed for [Materialize] (http://materializecss.com/)
+* Designed for [Materialize](http://materializecss.com/)
 
 ## Dependencies
 * Jquery: 3.2.\* => [download here](https://github.com/jquery/jquery/tree/3.2.1/dist)

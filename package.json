@@ -32,12 +32,15 @@
     },
     "devDependencies": {
         "gulp": "latest",
+        "gulp-autoprefixer":"latest",
         "gulp-clean-css": "latest",
         "gulp-concat": "latest",
         "gulp-rename": "latest",
         "gulp-rimraf": "latest",
+        "gulp-sass": "latest",
         "gulp-sourcemaps": "latest",
         "gulp-uglify": "latest",
+        "gulp-util":   "latest",
         "gulp-zip": "latest"
     },
     "bugs": {

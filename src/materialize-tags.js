@@ -390,7 +390,13 @@
 
             if (self.objectItems)
             {
-                self.options.freeInput = false;
+                if (self.options.freeInput === true)
+                {
+                    self.options.freeInput = true;
+                }
+                else{
+                    self.options.freeInput = false
+                }
             }
 
             makeOptionItemFunction(self.options, 'itemValue');

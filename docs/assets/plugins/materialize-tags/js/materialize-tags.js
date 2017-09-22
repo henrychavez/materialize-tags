@@ -87,6 +87,7 @@
         this.$label.on('click', function ()
         {
             $(this).addClass('active');
+            $(this).addClass('infocus');
             $(this).next('.materialize-tags').find('input.n-tag').focus();
         });
 
@@ -94,6 +95,7 @@
         {
             var label = $(this).parents('.materialize-tags').parent().find('label');
             $(this).parents('.materialize-tags').addClass('active');
+ +            !label.hasClass('infocus') && label.addClass('infocus');
 
             if (!label.hasClass('active'))
             {
@@ -104,6 +106,7 @@
             var parentContainer = $(this).parents('.materialize-tags'),
                 tags            = parentContainer.find('span.chip');
             parentContainer.removeClass('active');
+ +          parentContainer.parent().find('label').removeClass('infocus');
             // Verify if is empty and remove "active" class from label
             if (tags.length == 0 && $(this).val().length == 0)
             {
@@ -296,10 +299,10 @@
                 self.$input.prop('readOnly', false);
             }
 
-			// Remove active class when reached 0 tags
+            // Remove active class when reached 0 tags
             if (self.itemsArray.length == 0){
-				self.$input.siblings("label").first().removeClass('active');
-			}
+                self.$input.siblings("label").first().removeClass('active');
+            }
 
             self.$input.blur();
             self.$element.trigger($.Event('itemRemoved', {item : item, options : options}));
@@ -321,9 +324,9 @@
 
             self.pushVal();
             self.$container.removeClass('materialize-tags-max');
-			self.$input.siblings("label").first().removeClass('active');
+            self.$input.siblings("label").first().removeClass('active');
             self.$input.prop('readOnly', false);
-			self.$input.blur();
+            self.$input.blur();
         },
 
         /**
@@ -390,7 +393,13 @@
 
             if (self.objectItems)
             {
-                self.options.freeInput = false;
+                if (self.options.freeInput === true)
+                {
+                    self.options.freeInput = true;
+                }
+                else{
+                    self.options.freeInput = false
+                }
             }
 
             makeOptionItemFunction(self.options, 'itemValue');

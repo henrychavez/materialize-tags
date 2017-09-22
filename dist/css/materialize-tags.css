@@ -31,13 +31,15 @@
     outline: none;
 }
 
-.materialize-tags input {
+.materialize-tags input[type],
+.materialize-tags textarea.materialize-textarea {
     border: none;
     box-shadow: none;
     outline: none;
     background-color: transparent;
     padding: 0;
     margin: 0;
+    margin-top: 10px;
     width: auto !important;
     max-width: inherit;
 }
@@ -148,7 +150,7 @@
     padding: 0 12px;
     border-radius: 16px;
     background-color: #e4e4e4;
-    margin-top: 25px;
+    margin-top: 10px;
 }
 
 .chip i.material-icons {

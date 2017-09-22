@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <title>Materialize Tags</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
+    integrity="sha256-e22BQKCF7bb/h/4MFJ1a4lTRR2OuAe8Hxa/3tgU5Taw=" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/github.css">
+
+    <link rel="stylesheet" href="/assets/plugins/materialize-tags/css/materialize-tags.min.css">
+    <link rel="stylesheet" href="/assets/css/app.css"/>
+
+</head>
+<body>
+    <div id="fb-root"></div>
+    <header class="banner-header">
+        <div class="container">
+            <h1>Materialize Tags input</h1>
+            <p>This jQuery plugin providing a Material Design user interface for managing tags</p>
+            <p>
+                <a class="btn light-blue darken-3 waves-effect waves-light" style="margin-bottom: 10px;" href="https://github.com/henrychavez/materialize-tags">Code on Github</a>
+                <a class="btn light-blue darken-3 waves-effect waves-light" style="margin-bottom: 10px;" href="http://materializecss.com/">Materialize v0.100.2</a>
+                <a class="btn light-blue darken-3 waves-effect waves-light" style="margin-bottom: 10px;" href="https://github.com/corejavascript/typeahead.js">TypeAhead v1.1.1</a>
+                <a class="btn light-blue darken-3 waves-effect waves-light" style="margin-bottom: 10px;" href="http://henrychavez.github.io/materialize-tags/dist/materialize-tags.zip">Download as ZIP</a>
+            </p>
+        </div>
+    </header>
+    <div class="container">
+        <h3>Download</h3>
+
+        <h5>NPM</h5>
+
+        <p>You can also get the latest release using NPM. This release contains source files as well as the compiled CSS and JavaScript files.</p>
+
+        <pre><code data-language="bash">npm install materialize-tags</code></pre>
+
+        <h3>Examples</h3>
+
+        <div class="divider"></div>
+
+        <!-- ################################################################################
+        ================== Example 1. Basic example without preloaded tags ==================
+        ################################################################################# -->
+
+        <section id="example-basic" class="example">
+            <header>
+                <h4>1. Basic example without preloaded tags</h4>
+            </header>
+            <p>Just add <code>data-role="materialtags"</code> to your input field to automatically change it to a tags input field.</p>
+
+            <div class="row mt-example">
+                <div class="input-field col s12">
+                    <label for="tags" class="hola">Tags</label>
+                    <input type="text" name="tags" id="tags" value="" data-role="materialtags"/>
+                </div>
+            </div>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header">Show code</div>
+                    <div class="collapsible-body">
+                        <pre><code data-language="html"><input type="text" data&#45;role="materialtags" /></code></pre>
+                    </div>
+                </li>
+            </ul>
+            <table class="bordered responsive-table">
+                <thead>
+                <tr>
+                    <th>statement</th>
+                    <th>returns</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>$("input").val()</code></td>
+                    <td>
+                        <pre class="val"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>$("input").materialtags('items')</code></td>
+                    <td>
+                        <pre class="items"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ################################################################################
+        =================== Example 2. Basic example with preloaded tags ====================
+        ################################################################################# -->
+
+        <section id="example-basic-preloaded" class="example">
+            <header>
+                <h4>2. Basic example with preloaded tags</h4>
+            </header>
+            <p>Just add <code>data-role="materialtags"</code> to your input field to automatically change it to a tags input field.</p>
+
+            <div class="row mt-example">
+                <div class="input-field col s12">
+                    <label for="tags" class="hola">Tags</label>
+                    <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="materialtags">
+                </div>
+            </div>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header">Show code</div>
+                    <div class="collapsible-body">
+                        <pre><code data-language="html"><input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data&#45;role="materialtags" /></code></pre>
+                    </div>
+                </li>
+            </ul>
+            <table class="bordered responsive-table">
+                <thead>
+                <tr>
+                    <th>statement</th>
+                    <th>returns</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>$("input").val()</code></td>
+                    <td>
+                        <pre class="val"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>$("input").materialtags('items')</code></td>
+                    <td>
+                        <pre class="items"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ################################################################################
+        ==================== Example 3. Using TypeAhead with Materialize-Tags =====================
+        ################################################################################# -->
+
+        <section id="example-typeahead-section" class="example">
+            <header>
+                <h4>3. Using TypeAhead with Materialize-Tags</h4>
+            </header>
+            <p>Typeahead is not included in MaterializeCSS and Materialize Tags. Therefore, if you which to use the functionality offered by TypeAhead, you will have to
+                include your own typeahead library.<br>
+                The original version of <a href="http://twitter.github.io/typeahead.js/" target="_blank">typeahead.js</a> was developed by twitter, unfortunately
+                this project is unmaintained for more than two years. Thus, we have choosen to use the forked project by the CoreJavascript Team:
+                <a href="https://github.com/corejavascript/typeahead.js/" target="_blank">Go to Github Repository</a>.<br><br>
+
+                All functions works seamlessly with the latest version: <a href="https://github.com/corejavascript/typeahead.js/releases/tag/v1.1.1" target="_blank">v1.1.1</a>.<br>
+                <b>Warning:</b> A new possibility will be available in the next release of typeahead: <i>autoselect</i>. If you wish to use it, you will have to wait for the next official
+                release or to build the library from sources.<br><br>
+
+                The latest release file can be download from this link: <a href="https://github.com/corejavascript/typeahead.js/tree/master/dist" target="_blank">go to GitHub</a>
+            </p>
+
+        </section>
+
+        <!-- ################################################################################
+        =========== Example 3.1. Selecting values with TypeAhead - Basic Version ============
+        ################################################################################# -->
+
+        <section id="example-typeahead" class="example">
+            <header>
+                <h5>3.1. Selecting values with TypeAhead - Basic Version</h5>
+            </header>
+            <p>
+                Typeahead allows you to propose a list of valid tags that the user can choose. Very useful to recommend a list of values to user or restrict him to certain values.
+                <br><br>
+                Here is an example below:
+            </p>
+
+            <div class="row mt-example">
+                <div class="input-field col s12">
+                    <label for="tags">Tags</label>
+                    <input type="text" name="tags" id="tags-typeahead" class="typehead-input" value="Amsterdam,Washington"/>
+                </div>
+            </div>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header">Show code</div>
+                    <div class="collapsible-body">
+                        <pre>
+                            <code data-language="html">
+    &lt;input type=&quot;text&quot; value=&quot;Amsterdam,Washington&quot; data-role=&quot;materialtags&quot;/&gt;
+    &lt;script&gt;
+        var citynames = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            prefetch: {
+                url: 'assets/citynames.json',
+                filter: function(list) {
+                    return $.map(list, function(cityname) {
+                        return { name: cityname };
+                    });
+                }
+            }
+        });
+
+        citynames.initialize();
+
+        $('input').materialtags({
+            typeaheadjs: {
+                name: 'citynames',
+                displayKey: 'name',
+                valueKey: 'name',
+                source: citynames.ttAdapter()
+            }
+        });
+    &lt;/script&gt;
+                            </code></pre>
+                    </div>
+                </li>
+            </ul>
+            <table class="bordered responsive-table">
+                <thead>
+                <tr>
+                    <th>statement</th>
+                    <th>returns</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>$("input").val()</code></td>
+                    <td>
+                        <pre class="val"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>$("input").materialtags('items')</code></td>
+                    <td>
+                        <pre class="items"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ################################################################################
+        ======== Example 3.2. Selecting values with TypeAhead - Pattern Highlight =========
+        ################################################################################# -->
+
+    	<section id="example-typeahead-highlight" class="example">
+            <header>
+                <h5>3.2. Selecting values with TypeAhead - Pattern Highlight</h5>
+            </header>
+            <p>
+                In addition to proposing a list of values, Typeahead can highlight the matching pattern in the list of recommendation displayed.
+                <br><br>
+                Here is an example below:
+            </p>
+
+            <div class="row mt-example">
+                <div class="input-field col s12">
+                    <label for="tags">Tags</label>
+                    <input type="text" name="tags-highlight" id="tags-highlight" class="typehead-input" value="Amsterdam,Washington"/>
+                    <input type="text" name="tags" id="tags-typeahead" class="typehead-input" value="Amsterdam,Washington"/>
+                </div>
+            </div>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header">Show code</div>
+                    <div class="collapsible-body">
+                        <pre>
+                            <code data-language="html">
+    &lt;input type=&quot;text&quot; value=&quot;Amsterdam,Washington&quot; data-role=&quot;materialtags&quot;/&gt;
+    &lt;script&gt;
+        var citynames = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            prefetch: {
+                url: 'assets/citynames.json',
+                filter: function(list) {
+                    return $.map(list, function(cityname) {
+                        return { name: cityname };
+                    });
+                }
+            }
+        });
+
+        citynames.initialize();
+
+        $('input').materialtags({
+            typeaheadjs: [{
+    		highlight   : true,
+    	},
+    	{
+            name       : 'citynames',
+            displayKey : 'name',
+            valueKey   : 'name',
+            source     : citynames.ttAdapter()
+    	}]
+        });
+    &lt;/script&gt;
+                            </code></pre>
+                    </div>
+                </li>
+            </ul>
+            <table class="bordered responsive-table">
+                <thead>
+                <tr>
+                    <th>statement</th>
+                    <th>returns</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>$("input").val()</code></td>
+                    <td>
+                        <pre class="val"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>$("input").materialtags('items')</code></td>
+                    <td>
+                        <pre class="items"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ################################################################################
+        == Example 3.3. Selecting values with TypeAhead - Pattern Highlight and AutoSelect ==
+        ################################################################################# -->
+
+        <section id="example-typeahead-autoselect" class="example">
+            <header>
+                <h5>3.3. Selecting values with TypeAhead - Pattern Highlight and AutoSelect</h5>
+            </header>
+            <p>
+                In addition to proposing a list of values and highlight the matching pattern, Typeahead can automatically select the first proposition.
+                <br><br>
+                Here is an example below:
+            </p>
+
+            <div class="row mt-example">
+                <div class="input-field col s12">
+                    <label for="tags">Tags</label>
+                    <input type="text" name="tags-autoselect" id="tags-autoselect" class="typehead-input" value="Amsterdam,Washington"/>
+                </div>
+            </div>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="mdi-content-add"></i>Show code</div>
+                    <div class="collapsible-body">
+                        <pre>
+                            <code data-language="html">
+    &lt;input type=&quot;text&quot; value=&quot;Amsterdam,Washington&quot; data-role=&quot;materialtags&quot;/&gt;
+    &lt;script&gt;
+        var citynames = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            prefetch: {
+                url: 'assets/citynames.json',
+                filter: function(list) {
+                    return $.map(list, function(cityname) {
+                        return { name: cityname };
+                    });
+                }
+            }
+        });
+
+        citynames.initialize();
+
+        $('input').materialtags({
+            typeaheadjs: [{
+    		autoselect   : true,
+    		highlight   : true,
+    	},
+    	{
+            name       : 'citynames',
+            displayKey : 'name',
+            valueKey   : 'name',
+            source     : citynames.ttAdapter()
+    	}]
+        });
+    &lt;/script&gt;
+                            </code></pre>
+                    </div>
+                </li>
+            </ul>
+            <table class="bordered responsive-table">
+                <thead>
+                <tr>
+                    <th>statement</th>
+                    <th>returns</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>$("input").val()</code></td>
+                    <td>
+                        <pre class="val"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>$("input").materialtags('items')</code></td>
+                    <td>
+                        <pre class="items"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ################################################################################
+        ============================ Example 4. Objects as tags =============================
+        ################################################################################# -->
+
+        <section id="example_objects" class="example">
+            <header>
+                <h5>4. Objects as tags</h5>
+            </header>
+            <p>Instead of just adding strings as tags, bind objects to your tags. This makes it possible to set id values in
+                your input field's value, instead of just the tag's text.</p>
+
+            <div class="row mt-example">
+                <div class="input-field col s12">
+                    <label for="tags">Tags</label>
+                    <input type="text" name="tags" class="object-tag-input" id="tags-object"/>
+                </div>
+            </div>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header">Show code</div>
+                    <div class="collapsible-body">
+                        <pre>
+                            <code data-language="html">
+    &lt;input type=&quot;text&quot; /&gt;
+    &lt;script&gt;
+        var cities = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            prefetch: 'assets/cities.json'
+        });
+        cities.initialize();
+
+        var elt = $('input');
+        elt.materialtags({
+            itemValue: 'value',
+            itemText: 'text',
+            typeaheadjs: {
+                name: 'cities',
+                displayKey: 'text',
+                source: cities.ttAdapter()
+            }
+        });
+        elt.materialtags('add', { "value": 1 , "text": "Amsterdam" , "continent": "Europe" });
+        elt.materialtags('add', { "value": 4 , "text": "Washington" , "continent": "America" });
+        elt.materialtags('add', { "value": 7 , "text": "Sydney" , "continent": "Australia" });
+        elt.materialtags('add', { "value": 10, "text": "Beijing" , "continent": "Asia" });
+        elt.materialtags('add', { "value": 13, "text": "Cairo" , "continent": "Africa" });
+    &lt;/script&gt;
+                            </code></pre>
+                    </div>
+                </li>
+            </ul>
+            <table class="bordered responsive-table">
+                <thead>
+                <tr>
+                    <th>statement</th>
+                    <th>returns</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>$("input").val()</code></td>
+                    <td>
+                        <pre class="val"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>$("input").materialtags('items')</code></td>
+                    <td>
+                        <pre class="items"><code data-language="javascript"></code></pre>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="options">
+            <div class="page-header">
+                <h3>Options</h3>
+            </div>
+            <table class="bordered responsive-table">
+                <thead>
+                <tr>
+                    <th colspan="2">option</th>
+                    <th>description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="2"><code>tagClass</code></td>
+                    <td>
+                        <p>Classname for the tags, or a function returning a classname</p>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        tagClass: 'big'
+    });</code></pre>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        tagClass: function(item) {
+            return (item.length > 10 ? 'big' : 'small');
+        }
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>itemValue</code></td>
+                    <td>
+                        <p>When adding objects as tags, itemValue <em>must</em> be set to the name of the property containing the item's value, or a function returning an item's value.</p>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        itemValue: 'id'
+    });</code></pre>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        itemValue: function(item) {
+            return item.id;
+        }
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>itemText</code></td>
+                    <td>
+                        <p>When adding objects as tags, you can set itemText to the name of the property of item to use for a its tag's text. You may also provide a function which returns an item's value. When this options is not set, the value of <code>itemValue</code> will be used.
+
+
+                    <pre><code data-language="javascript">$('input').materialtags({
+        itemText: 'label'
+    });</code></pre>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        itemText: function(item) {
+            return item.label;
+        }
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>confirmKeys</code></td>
+                    <td>
+                        <p>Array of keycodes which will add a tag when typing in the input. (default: [13, 188], which are ENTER and comma)</p>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        confirmKeys: [13, 44]
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>maxTags</code></td>
+                    <td>
+                        <p>When set, no more than the given number of tags are allowed to add (default: undefined). When maxTags is reached, a class 'bootstrap-materialtags-max' is placed on the materialtags element.</p>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        maxTags: 3
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>maxChars</code></td>
+                    <td>
+                        <p>Defines the maximum length of a single tag. (default: undefined)</p>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        maxChars: 8
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>trimValue</code></td>
+                    <td>
+                        <p>When true, automatically removes all whitespace around tags. (default: false)</p>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        trimValue: true
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>allowDuplicates</code></td>
+                    <td>
+                        <p>When true, the same tag can be added multiple times. (default: false)</p>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        allowDuplicates: true
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>freeInput</code></td>
+                    <td>
+                        <p>Allow creating tags which are not returned by typeahead's source (default: true)</p>
+                        <div class="bs-callout bs-callout-warning">
+                            This is only possible when using string as tags. When itemValue option is set, this option will be ignored.
+                        </div>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        typeahead: {
+            source: ['Amsterdam', 'Washington', 'Sydney', 'Beijing', 'Cairo']
+        },
+        freeInput: true
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>typeahead</code></td>
+                    <td><p>Object containing typeahead specific options</td>
+                </tr>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><code>source</code></td>
+                    <td>
+                        <p>An array (or function returning a promise or array), which will be used as source for a typeahead.
+
+
+                    <pre><code data-language="javascript">$('input').materialtags({
+        typeahead: {
+            source: ['Amsterdam', 'Washington', 'Sydney', 'Beijing', 'Cairo']
+        }
+    });</code></pre>
+                    <pre><code data-language="javascript">$('input').materialtags({
+        typeahead: {
+            source: function(query) {
+                return $.get('http://someservice.com');
+            }
+        }
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>cancelConfirmKeysOnEmpty</code></td>
+                    <td><p>Boolean value controlling whether form submissions get processed when pressing enter in a field converted to a materialtags (default: false).
+                    <pre><code data-language="javascript">$('input').materialtags({
+        cancelConfirmKeysOnEmpty: true
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><code>onTagExists</code></td>
+                    <td><p>Function invoked when trying to add an item which allready exists. By default, the existing tag hides and fades in.
+                    <pre><code data-language="javascript">$('input').materialtags({
+        onTagExists: function(item, $tag) {
+            $tag.hide().fadeIn();
+        }
+    });</code></pre>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="methods">
+            <div class="page-header">
+                <h3>Methods</h3>
+            </div>
+            <table class="bordered table-responsive">
+                <thead>
+                <tr>
+                    <th>method</th>
+                    <th>description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>add</code></td>
+                    <td>
+                        <p>Adds a tag</p>
+
+                        <pre><code data-language="javascript">$('input').materialtags('add', 'some tag');</code></pre>
+
+                        <pre><code data-language="javascript">$('input').materialtags('add', { id: 1, text: 'some tag' });</code></pre>
+
+                        Optionally, you can pass a 3rd parameter (object or value) to the <code>add</code> method to gain more control over the process. The parameter is exposed in the <code>options</code> attribute of the event.
+
+                        <pre><code data-language="javascript">$('input').materialtags('add', 'some tag', {preventPost: true});</code></pre>
+
+                        Usage:
+
+                    <pre><code data-language="javascript">$('#tags-input').on('beforeItemAdd', function(event) {
+        var tag = event.item;
+        // Do some processing here
+        if (!event.options || !event.options.preventPost) {
+            $.ajax('/ajax-url', ajaxData, function(response) {
+                if (response.failure) {
+                    // Remove the tag since there was a failure
+                    // "preventPost" here will stop this ajax call from running when the tag is removed
+                    $('#tags-input').materialtags('remove', tag, {preventPost: true});
+                }
+            });
+        }
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>remove</code></td>
+                    <td>
+                        <p>Removes a tag</p>
+
+                        <pre><code data-language="javascript">$('input').materialtags('remove', 'some tag');</code></pre>
+
+                        <pre><code data-language="javascript">$('input').materialtags('remove', { id: 1, text: 'some tag' });</code></pre>
+
+                        Optionally, you can pass a 3rd parameter (object or value) to the <code>remove</code> method to gain more control over the process. The parameter is exposed in the <code>options</code> attribute of the event.
+
+                        <pre><code data-language="javascript">$('input').materialtags('remove', 'some tag', {preventPost: true});</code></pre>
+
+                        Usage:
+
+                    <pre><code data-language="javascript">$('#tags-input').on('beforeItemRemove', function(event) {
+        var tag = event.item;
+        // Do some processing here
+        if (!event.options || !event.options.preventPost) {
+            $.ajax('/ajax-url', ajaxData, function(response) {
+                if (response.failure) {
+                    // Re-add the tag since there was a failure
+                    // "preventPost" here will stop this ajax call from running when the tag is added
+                    $('#tags-input').materialtags('add', tag, {preventPost: true});
+                }
+            });
+        }
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>removeAll</code></td>
+                    <td>
+                        <p>Removes all tags</p>
+
+                        <pre><code data-language="javascript">$('input').materialtags('removeAll');</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>focus</code></td>
+                    <td>
+                        <p>Sets focus in the materialtags</p>
+
+                        <pre><code data-language="javascript">$('input').materialtags('focus');</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>input</code></td>
+                    <td>
+                        <p>Returns the materialtags's internal &lt;input /&gt;, which is used for adding tags. You could use this to add your own typeahead behaviour for example.</p>
+
+
+                        <pre><code data-language="html">var $elt = $('input').materialtags('input');</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>refresh</code></td>
+                    <td>
+                        <p>Refreshes the tags input UI. This might be usefull when you're adding objects as tags. When an object's text changes, you'll have to refresh to update the matching tag's text.</p>
+
+                        <pre><code data-language="javascript">$('input').materialtags('refresh');</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>destroy</code></td>
+                    <td>
+                        <p>Removes materialtags behaviour</p>
+
+                        <pre><code data-language="javascript">$('input').materialtags('destroy');</code></pre>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="methods">
+            <div class="page-header">
+                <h3>Events</h3>
+            </div>
+            <table class="table table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th>event</th>
+                    <th>description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>itemAddedOnInit</code></td>
+                    <td>
+                        During initialization, pre-defined tags being added will cause this event to be triggered. Example:
+                    <pre><code data-language="javascript">$('input').on('itemAddedOnInit', function(event) {
+        // event.item: contains the item
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>beforeItemAdd</code></td>
+                    <td>
+                        Triggered just before an item gets added. Example:
+                    <pre><code data-language="javascript">$('input').on('beforeItemAdd', function(event) {
+        // event.item: contains the item
+        // event.cancel: set to true to prevent the item getting added
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>itemAdded</code></td>
+                    <td>
+                        Triggered just after an item got added. Example:
+                    <pre><code data-language="javascript">$('input').on('itemAdded', function(event) {
+        // event.item: contains the item
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>beforeItemRemove</code></td>
+                    <td>
+                        Triggered just before an item gets removed. Example:
+                    <pre><code data-language="javascript">$('input').on('beforeItemRemove', function(event) {
+        // event.item: contains the item
+        // event.cancel: set to true to prevent the item getting removed
+    });</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>itemRemoved</code></td>
+                    <td>
+                        Triggered just after an item got removed. Example:
+                    <pre><code data-language="javascript">$('input').on('itemRemoved', function(event) {
+        // event.item: contains the item
+    });</code></pre>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <footer style="text-align: center; margin-top: 40px;">
+        <p>
+            Originally developed by <a href="https://github.com/henrychavez" target="_blank">Henry Chávez</a>,
+            maintained by <a href="https://github.com/DEKHTIARJonathan" target="_blank">Jonathan Dekhtiar</a>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"
+    integrity="sha256-uWtSXRErwH9kdJTIr1swfHFJn/d/WQ6s72gELOHXQGM=" crossorigin="anonymous"></script>
+
+    <script src="/assets/plugins/typeahead/typeahead.bundle.min.js"></script>
+    <script src="/assets/plugins/materialize-tags/js/materialize-tags.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/rainbow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/html.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/generic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/javascript.js"></script>
+
+    <script src="https://apis.google.com/js/platform.js"></script>
+
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/init.js"></script>
+</body>
+</html>

@@ -1,10 +1,10 @@
 var gulp       = require('gulp'),
-    uglify     = require('gulp-uglify'),
-    minifyCss  = require('gulp-minify-css'),
+    minifyCss  = require('gulp-clean-css'),
     concat     = require('gulp-concat'),
     rename     = require("gulp-rename"),
-    sourcemaps = require('gulp-sourcemaps'),
     rimraf     = require('gulp-rimraf'),
+    sourcemaps = require('gulp-sourcemaps'),
+    uglify     = require('gulp-uglify'),
     zip        = require('gulp-zip');
 
 gulp.task('js', function ()
@@ -48,4 +48,12 @@ gulp.task('zip', function ()
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build', ['css', 'js', 'zip']);
+gulp.task('docs', function ()
+{
+    // place code for your default task here
+    return gulp.src('dist/*/**')
+        .pipe(gulp.dest('docs/assets/plugins/materialize-tags'))
+});
+
+
+gulp.task('build', ['css', 'js', 'docs', 'zip']);

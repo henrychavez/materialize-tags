@@ -388,11 +388,13 @@
             self.options = $.extend({}, defaultOptions, options);
             // When itemValue is set, freeInput should always be false
 
-            if (self.objectItems)
+            if (self.objectItems && self.options.freeInput === true)
             {
-                self.options.freeInput = false;
+                self.options.freeInput = true;
             }
-
+            else{
+                self.options.freeInput = false
+            }
             makeOptionItemFunction(self.options, 'itemValue');
             makeOptionItemFunction(self.options, 'itemText');
             makeOptionFunction(self.options, 'tagClass');

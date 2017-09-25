@@ -5,7 +5,7 @@
     "description": "A jQuery tags input plugin based on Materialize",
     "homepage": "https://github.com/henrychavez/materialize-tags",
     "author": "Henry Chávez <henry19.chavez@gmail.com>",
-    "contributors": [
+    "maintainers": [
         {
             "name": "Jonathan Dekhtiar",
             "email": "contact@jonathandekhtiar.eu"
@@ -32,15 +32,16 @@
     },
     "devDependencies": {
         "gulp": "latest",
-        "gulp-autoprefixer":"latest",
+        "gulp-autoprefixer": "latest",
         "gulp-clean-css": "latest",
         "gulp-concat": "latest",
+        "gulp-header": "latest",
         "gulp-rename": "latest",
         "gulp-rimraf": "latest",
         "gulp-sass": "latest",
         "gulp-sourcemaps": "latest",
         "gulp-uglify": "latest",
-        "gulp-util":   "latest",
+        "gulp-util": "latest",
         "gulp-zip": "latest"
     },
     "bugs": {

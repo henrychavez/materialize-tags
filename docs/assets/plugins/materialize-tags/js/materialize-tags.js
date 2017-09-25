@@ -464,6 +464,7 @@
                 self.$input.on('focusout', $.proxy(function (event)
                 {
                     self.add(self.$input.val());
+                    self.$input.val('');
 
                 }, self));
             }

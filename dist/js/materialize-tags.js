@@ -1,3 +1,11 @@
+/**
+ * materialize-tags - A jQuery tags input plugin based on Materialize
+ * @version v1.1.0
+ * @link https://github.com/henrychavez/materialize-tags
+ * @license MIT
+ * @author Henry Chávez <henry19.chavez@gmail.com>
+ * @maintainer Jonathan Dekhtiar <contact@jonathandekhtiar.eu>
+ */
 (function ($)
 {
     "use strict";

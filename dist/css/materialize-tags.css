@@ -1,7 +1,16 @@
+/**
+ * materialize-tags - A jQuery tags input plugin based on Materialize
+ * @version v1.1.0
+ * @link https://github.com/henrychavez/materialize-tags
+ * @license MIT
+ * @author Henry Chávez <henry19.chavez@gmail.com>
+ * @maintainer Jonathan Dekhtiar <contact@jonathandekhtiar.eu>
+ */
 .materialize-tags {
     background: transparent;
     border-bottom: 1px solid #999;
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
     padding: 0 6px;
     margin-bottom: 10px;
     color: #444;
@@ -24,10 +33,10 @@
 }
 
 .materialize-tags.active {
-    border-bottom-color: #26a69a;
     -webkit-box-shadow: 0 1px 0 0 #26a69a;
     -moz-box-shadow: 0 1px 0 0 #26a69a;
     box-shadow: 0 1px 0 0 #26a69a;
+    border-bottom-color: #26a69a;
     outline: none;
 }
 
@@ -37,11 +46,10 @@
     box-shadow: none;
     outline: none;
     background-color: transparent;
+    margin: 10px 0 0 0;
     padding: 0;
-    margin: 0;
-    margin-top: 10px;
-    width: auto !important;
-    max-width: inherit;
+    width: fit-content;
+    flex-grow: 1;
 }
 
 .materialize-tags input::-moz-placeholder {
@@ -141,16 +149,9 @@
 }
 
 .chip {
-    display: inline-block;
-    height: 32px;
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(0,0,0,0.6);
-    line-height: 32px;
-    padding: 0 12px;
-    border-radius: 16px;
-    background-color: #e4e4e4;
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    min-width: fit-content;
 }
 
 .chip i.material-icons {
@@ -159,4 +160,8 @@
     font-size: 16px;
     line-height: 32px;
     padding-left: 8px;
+}
+
+.twitter-typeahead{
+    flex-grow: 1;
 }

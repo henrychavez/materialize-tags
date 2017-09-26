@@ -28,7 +28,8 @@
     },
     "dependencies": {
         "jquery": "3.2.x",
-        "materialize-css": "0.100.x"
+        "materialize-css": "0.100.x",
+        "corejs-typeahead": "1.2.x"
     },
     "devDependencies": {
         "gulp": "latest",

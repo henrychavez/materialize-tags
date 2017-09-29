@@ -21,3 +21,6 @@ deploy:
   provider: npm
   email: "henry19.chavez@gmail.com"
   api_key: $GITHUB_AUTH_TOKEN
+  on:
+    tags: true
+    branch: master

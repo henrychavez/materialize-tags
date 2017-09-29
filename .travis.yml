@@ -1,19 +1,26 @@
 language: node_js
+
+dist: trusty
+
 node_js:
-- 6.0.0
+  - "6"
+
 before_install:
-- npm install -g grunt-cli@1.2.0
+  - npm install -g grunt-cli@1.2.0
+
 install:
-- npm install
+  - npm install
+
 script: gulp build
+
 cache:
   directories:
-  - node_modules
+    - node_modules
+
 deploy:
   provider: npm
-  email: $NPM_EMAIL
+  email: "henry19.chavez@gmail.com"
   api_key:
     secure: $GITHUB_AUTH_TOKEN
   on:
     tags: true
-    branch: master

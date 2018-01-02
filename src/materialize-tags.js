@@ -223,7 +223,7 @@
             self.itemsArray.push(item);
             
             // Custom class for the tag
-            if(options.tagClass){
+            if(options && options.tagClass){
                 tagClass = options.tagClass;
             }
 

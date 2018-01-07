@@ -1,7 +1,7 @@
 {
     "name": "materialize-tags",
     "license": "MIT",
-    "version": "1.2.1",
+    "version": "1.2.3",
     "description": "A jQuery tags input plugin based on Materialize",
     "homepage": "https://github.com/henrychavez/materialize-tags",
     "author": "Henry Chávez <henry19.chavez@gmail.com>",

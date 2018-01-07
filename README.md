@@ -1,6 +1,5 @@
 # Materialize Tags
-[![Build Status](https://travis-ci.org/henrychavez/materialize-tags.svg?branch=master)](https://travis-ci.org/henrychavez/materialize-tags)
-[![Dependency Status](https://gemnasium.com/badges/github.com/henrychavez/materialize-tags.svg)](https://gemnasium.com/github.com/henrychavez/materialize-tags)
+[![npm](https://img.shields.io/npm/v/materialize-tags.svg)](https://www.npmjs.com/package/materialize-tags) [![npm](https://img.shields.io/npm/dt/materialize-tags.svg?label=npm%20downloads)](https://www.npmjs.com/package/materialize-tags) [![Build Status](https://travis-ci.org/henrychavez/materialize-tags.svg?branch=master)](https://travis-ci.org/henrychavez/materialize-tags) [![Dependency Status](https://gemnasium.com/badges/github.com/henrychavez/materialize-tags.svg)](https://gemnasium.com/github.com/henrychavez/materialize-tags)
 
 Materialize Tags is a jQuery plugin providing a Material Design user interface for managing tags.
 

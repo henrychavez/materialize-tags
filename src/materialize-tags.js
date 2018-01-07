@@ -226,6 +226,11 @@
 
             // register item in internal array and map
             self.itemsArray.push(item);
+            
+            // Custom class for the tag
+            if(options && options.tagClass){
+                tagClass = options.tagClass;
+            }
 
             // add a tag element
             var $tag = $('<span class="' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<i class="material-icons" data-role="remove">close</i></span>');

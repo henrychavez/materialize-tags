@@ -1,6 +1,6 @@
 /**
  * materialize-tags - A jQuery tags input plugin based on Materialize
- * @version v1.2.0
+ * @version v1.2.1
  * @link https://github.com/henrychavez/materialize-tags
  * @license MIT
  * @author Henry Chávez <henry19.chavez@gmail.com>
@@ -9,6 +9,10 @@
 (function ($)
 {
     "use strict";
+
+    var tabKey = 9,
+        enterKey = 13,
+        commaKey = 188;
 
     /**
     * Default Configuration
@@ -24,10 +28,11 @@
         addOnBlur                   : true,
         maxTags                     : undefined,
         maxChars                    : undefined,
-        confirmKeys                 : [9,13, 44, 188],
+        confirmKeys                 : [tabKey,enterKey, 44, commaKey],
         onTagExists                 : onTagExists,
         trimValue                   : true,
         allowDuplicates             : false,
+        allowTabOnEmpty             : false,
         deleteTagsOnBackspace       : true,
         deleteTagsOnDeleteKey       : true,
         MoveTagOnLeftArrow          : true,
@@ -547,8 +552,15 @@
                     return;
                 }
 
-                var text            = $input.val(),
+                var text             = $input.val(),
                     maxLengthReached = self.options.maxChars && text.length >= self.options.maxChars;
+
+                // If not text is entered and tab event is fired shouldn't prevent the default behavior
+                if (self.options.allowTabOnEmpty && isEmpty(text) && event.which === tabKey) 
+                {
+                    return;
+                }
+
                 if (self.options.freeInput && (keyCombinationInList(event, self.options.confirmKeys) || maxLengthReached))
                 {
                     self.add(maxLengthReached ? text.substr(0, self.options.maxChars) : text);
@@ -797,6 +809,16 @@
         });
 
         return found;
+    }
+
+    /**
+    * Return if a text is empty
+    *
+    * @param text
+    * @returns {boolean}
+    */
+    function isEmpty(text) {
+        return text.length === 0;
     }
 
     /**
